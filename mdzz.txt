@@ -1,0 +1,236 @@
+const int #define
+char *a; char a[19]
+
+C++规定，对象的成员变量的初始化动作发生在进入构造函数本体之前。 
+#ifndef A_H_
+#define A_H_
+...
+#endif
+这种方法不能防止编译器将文件包含两次，而只是让编译器忽略除第一次包含之外的所有内容！
+
+
+
+z当在基类中创建了虚函数而没有在基类中对虚函数做具体的实现时将会产生LNK2001错误。解决办法是：①、将该虚函数定义为纯虚函数。②、在基类中对该虚函数做具体实现。
+
+1、全缓冲
+在这种情况下，当填满标准I/O缓存后才进行实际I/O操作。全缓冲的典型代表是对磁盘文件的读写。
+2、行缓冲
+在这种情况下，当在输入和输出中遇到换行符时，执行真正的I/O操作。这时，我们输入的字符先存放在缓冲区，等按下回车键换行时才进行实际的I/O操作。典型代表是键盘输入数据。
+3、不带缓冲
+也就是不进行缓冲，标准出错情况stderr是典型代表，这使得出错信息可以直接尽快地显示出来。
+
+cout<<endl;
+相当于
+cout<<”\n” <<flush;
+
+
+161212  人生第一次非故意越界  sprintf（） 给结构体中的一个成员赋值时直接给结构体赋值导致越界破坏了在它后面定义的vector 导致无复发使用vector的动态内存
+
+16^1	16
+16^2	256
+16^3	4096
+16^4	65536
+16^5	1048576
+16^6	16777216
+16^7	268435456
+16^8	4294967296
+
+一个字节=8个0和1 
+在txt里面输入一个a = 1个字节
+8个字节=1b
+1k=1024个字节
+1m=1024^2个字节
+1G=1024^3个字节
+4G=1024^3*4个字节=4294967296个字节=34359738368个0和1
+32位操作系统一个指针的大为4个字节=32个0和1  可以显示的最多不同值为4294967296
+2*32=429496729  32位操作系统理论上只能控制4G内存 如果控制了8G没出错请大家一起膜拜微软的大神吧
+
+
+系统调用开销大  使用fstream 代替文件描述符  每次读取字数不要太少
+
+访问标准输出流必须同步：在任何时候，只有一个线程可以访问 std::cout。
+
+
+类内静态函数定义
+
+class test
+{
+	static int _a
+	
+};	
+
+ int test::_a =1;
+
+
+循环过程中消除容器中成员
+for(auto i = a.begin();i!=a.end();)
+{
+	if(xxxxx)
+	{
+	  i=a.erase(i);
+	}
+	else
+	{
+	  ++i;
+	{
+}
+
+复制文件 c++快100ms
+#include<iostream>
+#include<fstream>
+#include<Windows.h>
+using namespace std;
+void woqu(char *a, char*b)
+{
+	ifstream fin("aa.PDF", ios::_Nocreate | ios::binary);
+	ofstream fout("g.PDF", ios::binary);
+	char c[1024];
+
+	while (!fin.eof())
+	{
+		fin.read(c, 1024);
+		fout.write(c, fin.gcount());
+	}
+	fin.close();
+	fout.close();
+}
+
+void Tranfile(char* pszFileCopee, char* pszFileCoper)
+{
+	fstream fsCopee(pszFileCopee, ios::binary | ios::in);
+	fstream fsCoper(pszFileCoper, ios::binary | ios::out);
+	fsCoper << fsCopee.rdbuf();
+}
+int main()
+{
+	DWORD start, stop;
+
+	FILE *op, *inp;
+	fopen_s(&op, "aa.PDF", "rb");
+	fopen_s(&inp, "c.PDF", "wb");
+
+	void *buf;
+	char c;
+	start = GetTickCount();
+	while (!feof(op))
+	{
+		//fread(&buf, 1, 1, op);
+		//fwrite(&buf, 1, 1, inp);
+		fread(&c, 1, 1, op);
+		fwrite(&c, 1, 1, inp);
+	}
+	stop = GetTickCount();
+	fclose(inp);
+	fclose(op);
+	printf("over");
+	printf("c time: %lld ms\n", stop - start);
+	
+	start = GetTickCount();
+	Tranfile("aa.PDF", "b.PDF");
+	stop = GetTickCount();
+	printf("c++ time: %lld ms\n", stop - start);
+	system("pause");
+
+
+}
+
+
+
+获取文件信息的方法
+
+struct _sta buf;
+_stat("path",&buf);
+buf.xx;
+
+char a;  字符变量
+char *a; 指向字符变量的指针
+char *&a;指向字符变量的指针的引用
+
+
+类内static 
+#include<iostream>
+#include<random>
+#include"test.h"
+using namespace std;
+int main()
+{
+	test data1;
+	cout << data1.data << endl;
+	data1.data = 10;
+	test data2;
+	cout << data2.data << endl;
+	change();
+
+	test data3;
+	cout << data3.data << endl;
+	cin.get();
+}
+
+1 5 10
+
+
+虚函数如果拥有默认实参 vs2013
+基类使用基类的默认实参
+派生的使用派生的默认实参
+基类绑定派生使用基类实参
+
+
+#include <stdio.h>  
+#include <time.h>  
+int main()  
+{  
+    time_t timep;  
+    struct tm *p;  
+    time(&timep);  
+    p =localltime(&timep); //此函数获得的tm结构体的时间，是已经进行过时区转化为本地时间  
+    //p = gmtime(&timep); //把日期和时间转换为格林威治(GMT)时间的函数  
+  
+    printf("Year:  %d\n", 1900+p->tm_year);  
+    printf("Month:  %d\n", 1+p->tm_mon);  
+    printf("Day:  %d\n", p->tm_mday);  
+    printf("Hour:  %d\n", p->tm_hour);  
+    printf("Minute:  %d\n", p->tm_min);  
+    printf("Second:  %d\n",  p->tm_sec);  
+    printf("Weekday:  %d\n", p->tm_wday);  
+    printf("Days:  %d\n", p->tm_yday);  
+    printf("Isdst:  %d\n", p->tm_isdst);  
+} 
+f:
+完整路径 +数字
+c:
+解析 map 路径 文件名
+返回选中文件路径路径
+f:
+判断文件还是文件加
+文件返回信息 是文件
+文件夹继续查询
+返回完整路径+数字
+c:
+选中点击下载
+f:
+文件启动文件发送
+文件夹启动冻文件夹发送
+
+所有消息同一个报文
+使用N个标识
+
+
+在terminal中使用输入法输入
+terminal根据字符编码转换成二进制流
+二进制流通过MySQL客户端传输到MySQL Server
+Server通过character-set-client解码
+判断character-set-client和目标表的charset是否一致
+如果不一致则进行一次从client-charset到table-charset的一次字符编码转换
+将转换后的字符编码二进制流存入文件中
+
+从文件读出二进制数据流
+用表字符集编码进行解码
+将数据转换为character-set-client的编码
+使用character-set-client编码为二进制流
+Server通过网络传输到远端client
+client通过bash配置的字符编码展示查询结果
+
+
+无签名 utf8 fromutf8送到界面
+char buf[1024];
+sprintf(buf, "insert into test values(\"%s\",15)",line->text().toUtf8().data());

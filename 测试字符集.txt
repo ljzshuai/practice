@@ -1,3 +1,7 @@
+//vs…Ë÷√Œﬁ∑˚∫≈utf8
+
+
+
 #include <qobject.h>
 #include <qpushbutton.h>
 #include <qlabel.h>
@@ -49,7 +53,7 @@ MainClass::MainClass()
 	QObject::connect(m_AlterClass, &QPushButton::clicked, [=](){
 		
 		char buf[1024];
-		sprintf(buf,"select * from testauto where ID =122");
+		sprintf(buf,"select * from test where age =15");
 		if (mysql_query(&pCmysql,buf) != 0)
 		{
 			int a1;
@@ -68,19 +72,23 @@ MainClass::MainClass()
 		while ((rel_row = mysql_fetch_row(result1)) != NULL)
 		{
 			
-			label->setText(QString::fromLatin1(rel_row[2]).toUtf8().data());
+			
+			//label->setText(QString::fromLocal8Bit("∞¢µ¿∑Ú"));
+			label->setText(QString::fromUtf8(rel_row[0]));
 		}
 
 	});
 	
 	QObject::connect(m_AddClass, &QPushButton::clicked, [=](){
 		char buf[1024];
-		sprintf(buf, "insert into testauto values(122,10,\"%s\")",line->text().toLatin1().data());
-		buf;
-		if(mysql_query(&pCmysql,buf) != 0)
+		sprintf(buf, "insert into test values(\"%s\",15)",line->text().toUtf8().data());
+			
+		if (mysql_query(&pCmysql,buf) != 0)
 		{
-			int a1;
-			a1++;
+			const char * dd = mysql_error(&pCmysql);
+			int a;
+			a++;
+			dd;
 		}
 	
 	});
@@ -90,7 +98,7 @@ MainClass::MainClass()
 		mysql_real_connect(&pCmysql, "127.0.0.1",
 		"dbuser1", "dbuser1",
 		"db1", 0, 0, 0);
-
+		mysql_query(&pCmysql, "set names utf8");
 }
 
 MainClass::~MainClass()

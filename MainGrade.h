@@ -1,3 +1,4 @@
+#pragma once
 #include <qobject.h>
 #include <qpushbutton.h>
 #include <qlabel.h>

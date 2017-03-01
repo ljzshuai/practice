@@ -234,3 +234,6 @@ client通过bash配置的字符编码展示查询结果
 无签名 utf8 fromutf8送到界面
 char buf[1024];
 sprintf(buf, "insert into test values(\"%s\",15)",line->text().toUtf8().data());
+
+学号 姓名 学期 科目 成绩 补考成绩
+

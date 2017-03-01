@@ -1,3 +1,4 @@
+#pragma once
 #include <qobject.h>
 #include <qpushbutton.h>
 #include <qlabel.h>
@@ -20,10 +21,10 @@ private:
 
 Vland::Vland()
 {
-	this->setFixedSize(200,130);
-	m_button_land = new QPushButton("µÇÂ½", this);
-	m_label_user = new QLabel("Name ", this);
-	m_label_pwd = new QLabel("ÃÜÂë ", this);
+	this->setFixedSize(200,150);
+	m_button_land = new QPushButton(QString::fromLocal8Bit("µÇÂ½"), this);
+	m_label_user = new QLabel(QString::fromLocal8Bit("ÐÕÃû "), this);
+	m_label_pwd = new QLabel(QString::fromLocal8Bit("ÃÜÂë "), this);
 	m_label_msg = new QLabel(this);
 	m_LEdit_pwd = new QLineEdit(this);
 	m_LEdit_user = new QLineEdit(this);
@@ -39,11 +40,19 @@ Vland::Vland()
 	Hlay_pwd->addWidget(m_label_pwd);
 	Hlay_pwd->addWidget(m_LEdit_pwd);
 
+	Vlay->addWidget(new QLabel());
 	Vlay->addLayout(Hlay_user);
 	Vlay->addLayout(Hlay_pwd);
 	Vlay->addWidget(m_button_land);
 	Vlay->addWidget(m_label_msg);
 
+	QFile styleSheet(":/new/prefix1/qt_practicemyStyle.qss");
+	if (!styleSheet.open(QIODevice::ReadOnly))
+	{
+		qWarning("Can't open the style sheet file.");
+		return;
+	}
+	this->setStyleSheet(styleSheet.readAll());
 }
 
 Vland::~Vland()

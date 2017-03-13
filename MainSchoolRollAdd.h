@@ -24,6 +24,8 @@ public:
 	MainSchoolRollAdd();
 	~MainSchoolRollAdd();
 
+	void on_button_add();
+
 private:
 	QPLabel 		m_label_ID,    m_label_college, m_label_name,
 					m_label_major, m_label_sex,     m_label_year,  m_label_msg_revise,
@@ -122,7 +124,29 @@ MainSchoolRollAdd::MainSchoolRollAdd()
 		return;
 	}
 	this->setStyleSheet(styleSheet.readAll());
+
 	this->resize(540, 350);
+
+	QObject::connect(m_button_add, &QPushButton::clicked, this, &MainSchoolRollAdd::on_button_add);
+
+
+	this->setWindowModality(Qt::ApplicationModal);
+	this->setAttribute(Qt::WA_DeleteOnClose);
+}
+
+void MainSchoolRollAdd::on_button_add()
+{
+	if (m_LineEdt_ID->text().size() == 0)
+		m_label_msg_revise->setText(QString::fromLocal8Bit("请输入学号"));
+	if (m_LineEdt_name->text().size() == 0)
+		m_label_msg_revise->setText(QString::fromLocal8Bit("请输入姓名"));
+	if (m_LineEdt_perID->text().size() == 0)
+		m_label_msg_revise->setText(QString::fromLocal8Bit("请输入身份证号"));
+	if (m_LineEdt_year->text().size() == 0)
+		m_label_msg_revise->setText(QString::fromLocal8Bit("请输入入学年份"));
+
+	QString tmp = m_combox_edu->currentText();
+
 }
 
 MainSchoolRollAdd::~MainSchoolRollAdd()

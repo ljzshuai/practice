@@ -43,32 +43,32 @@ MainSchoolRollRevise::MainSchoolRollRevise()
 	m_dateEdit = new QDateEdit(this);
 	m_dateEdit->setDate(*m_date);
 
-	m_label_ID = new QLabel(QString::fromLocal8Bit("      学号"), this);
-	m_label_name = new QLabel(QString::fromLocal8Bit("      姓名"), this);
+	m_label_ID      = new QLabel(QString::fromLocal8Bit("      学号"), this);
+	m_label_name    = new QLabel(QString::fromLocal8Bit("      姓名"), this);
 	m_label_college = new QLabel(QString::fromLocal8Bit("      学院"), this);//
-	m_label_major = new QLabel(QString::fromLocal8Bit("      专业"), this);//
-	m_label_sex = new QLabel(QString::fromLocal8Bit("      性别"), this);//
-	m_label_year = new QLabel(QString::fromLocal8Bit("      入学年份"), this);
-	m_label_edu = new QLabel(QString::fromLocal8Bit("      学历"), this);//
-	m_label_xz = new QLabel(QString::fromLocal8Bit("      学制"), this);//
-	m_label_perID = new QLabel(QString::fromLocal8Bit("      身份证"), this);
-	m_label_birth = new QLabel(QString::fromLocal8Bit("      生日"));//
+	m_label_major   = new QLabel(QString::fromLocal8Bit("      专业"), this);//
+	m_label_sex     = new QLabel(QString::fromLocal8Bit("      性别"), this);//
+	m_label_year    = new QLabel(QString::fromLocal8Bit("      入学年份"), this);
+	m_label_edu     = new QLabel(QString::fromLocal8Bit("      学历"), this);//
+	m_label_xz      = new QLabel(QString::fromLocal8Bit("      学制"), this);//
+	m_label_perID   = new QLabel(QString::fromLocal8Bit("      身份证"), this);
+	m_label_birth   = new QLabel(QString::fromLocal8Bit("      生日"));//
 	m_label_msg_revise = new QLabel(this);
-	m_label_msg_ch = new QLabel(this);
+	m_label_msg_ch  = new QLabel(this);
 
-	m_LineEdt_ID = new QLineEdit(this);
+	m_LineEdt_ID    = new QLineEdit(this);
 	m_LineEdt_perID = new QLineEdit(this);
-	m_LineEdt_year = new QLineEdit(this);
-	m_LineEdt_name = new QLineEdit(this);
+	m_LineEdt_year  = new QLineEdit(this);
+	m_LineEdt_name  = new QLineEdit(this);
 
 	m_gboxlay = new QGridLayout(this);
 
-	m_button_query = new QPushButton(QString::fromLocal8Bit("查询"), this);
+	m_button_query  = new QPushButton(QString::fromLocal8Bit("查询"), this);
 	m_button_revise = new QPushButton(QString::fromLocal8Bit("修改"), this);
 
-	m_combox_xz = new QComboBox(this);//学制
-	m_combox_edu = new QComboBox(this);//学历
-	m_combox_major = new QComboBox(this);//专业
+	m_combox_xz      = new QComboBox(this);//学制
+	m_combox_edu     = new QComboBox(this);//学历
+	m_combox_major   = new QComboBox(this);//专业
 	m_combox_college = new QComboBox(this);//学院
 	m_combox_sex = new QComboBox(this);
 
@@ -128,7 +128,11 @@ MainSchoolRollRevise::MainSchoolRollRevise()
 		return;
 	}
 	this->setStyleSheet(styleSheet.readAll());
+
 	this->resize(540, 350);
+
+	this->setAttribute(Qt::WA_DeleteOnClose);
+	this->setWindowModality(Qt::ApplicationModal);
 }
 
 MainSchoolRollRevise::~MainSchoolRollRevise()

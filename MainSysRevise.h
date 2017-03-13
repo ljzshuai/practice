@@ -56,6 +56,9 @@ MainSysRevise::MainSysRevise()
 	}
 	this->setStyleSheet(styleSheet.readAll());
 
+	this->setWindowModality(Qt::ApplicationModal);
+	this->setAttribute(Qt::WA_DeleteOnClose);
+
 }
 
 MainSysRevise::~MainSysRevise()

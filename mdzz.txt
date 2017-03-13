@@ -237,3 +237,21 @@ sprintf(buf, "insert into test values(\"%s\",15)",line->text().toUtf8().data());
 
 学号 姓名 学期 科目 成绩 补考成绩
 
+
+this->setWindowFlags(Qt::FramelessWindowHint);
+删除界面外框	
+this->setWindowModality(Qt::ApplicationModal);
+没有父类 设置模态
+
+//GBK‐> QString  
+QString str = QString::fromLocal8Bit("新浪微博");  
+
+ comboBox->clear();  
+    qDebug()<<"======1======";  
+    comboBox->addItems(QStringList()<<tr("竹外桃花三两枝")<<tr("春江水暖鸭先知")  
+                       <<tr("蒌蒿满地芦芽短")<<tr("正是河豚欲上时"));  
+
+void QComboBox::currentIndexChanged(const QString &text)
+
+
+

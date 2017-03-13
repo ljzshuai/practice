@@ -124,7 +124,11 @@ MainSchoolRollQuery::MainSchoolRollQuery()
 		return;
 	}
 	this->setStyleSheet(styleSheet.readAll());
+
 	this->resize(540, 350);
+
+	this->setWindowModality(Qt::ApplicationModal);
+	this->setAttribute(Qt::WA_DeleteOnClose);
 }
 
 MainSchoolRollQuery::~MainSchoolRollQuery()

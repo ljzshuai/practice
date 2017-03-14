@@ -1,3 +1,5 @@
+http://www.cnblogs.com/haippy/p/3237213.html
+
 const int #define
 char *a; char a[19]
 
@@ -252,6 +254,27 @@ QString str = QString::fromLocal8Bit("新浪微博");
                        <<tr("蒌蒿满地芦芽短")<<tr("正是河豚欲上时"));  
 
 void QComboBox::currentIndexChanged(const QString &text)
+
+发生事件  创建事件对象  事件对象给当前窗口的父的QObject的event()函数  分发 事件过滤 mouseMoveEvent((QMouseEvent*)event);
+类似函数接收 我们可以重写这个函数
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

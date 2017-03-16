@@ -1,5 +1,5 @@
 http://www.cnblogs.com/haippy/p/3237213.html
-
+http://blog.csdn.net/yamingwu/article/details/47841689 std::thread
 const int #define
 char *a; char a[19]
 
@@ -260,10 +260,21 @@ void QComboBox::currentIndexChanged(const QString &text)
 
 
 
+获取系统时间
+	char buf[1024];
+	system_clock::time_point p = system_clock::now();
+	std::time_t t = system_clock::to_time_t(p);
+	ctime_s(buf, sizeof(buf), &t);
 
 
+计时
+	auto t1 = system_clock::now();
+	std::this_thread::sleep_for(std::chrono::seconds(5));
+	auto t2 = system_clock::now();
 
+	auto duration = std::chrono::duration_cast<microseconds>(t2-t1);
 
+	std::cout << double(duration.count())*std::chrono::microseconds::period::num / std::chrono::microseconds::period::den << "秒" << std::endl;
 
 
 

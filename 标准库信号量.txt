@@ -1,0 +1,125 @@
+/*
+	一个人放两个人拿 只有空才能放 只能拿自己属于自己的
+*/
+
+#include <iostream>
+#include <string>
+#include <chrono>
+#include <random>
+#include <mutex>
+#include <fstream>
+
+std::mutex mtx;				// 全局互斥锁.
+std::condition_variable em,app,ori; // 全局条件变量.
+bool ready = false;			// 全局标志位.
+std::ofstream my_cout("a.txt");
+int j = 2000;
+void  fun_em()
+{
+	std::default_random_engine e;
+	std::uniform_int_distribution<unsigned>u(1, 2);
+	std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	
+	while (1) 
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		std::unique_lock <std::mutex> lck(mtx);
+		
+		switch (u(e))
+		{
+		case 1:
+			my_cout << "放入  苹果" << '\n';
+			ready = true;
+			app.notify_all();
+			
+			break;
+
+		case 2:	
+			my_cout << "放入桔子" << '\n';
+			ready = true;
+			ori.notify_all();
+			break;
+
+		default:
+			break;
+		}
+
+		while(ready)
+		em.wait(lck);
+		--j;
+		if (j == 0)
+		{
+			ready = true;
+			ori.notify_all();
+			app.notify_all();
+			return;
+		}
+	}
+}
+
+
+void fun_app()
+{
+	while (1)
+	{
+		std::unique_lock <std::mutex> lck(mtx);
+		while(!ready)
+		app.wait(lck);
+		if (j == 0)
+			return;
+		my_cout << "拿走  苹果" << '\n';
+		ready = false;
+		em.notify_all();
+	}
+}
+
+void fun_ori()
+{
+	
+	while (1)
+	{
+		std::unique_lock <std::mutex> lck(mtx);
+		while (!ready)
+		ori.wait(lck);	
+		if (j == 0)
+			return;
+		my_cout << "拿走桔子" << '\n';
+		ready = false;
+		em.notify_all();
+	}
+}
+
+void tee()
+{
+	std::ifstream my_cin("a.txt");
+	std::string str1;
+	std::string str2;
+
+	while (std::getline(my_cin, str1))
+	{
+		if (std::getline(my_cin, str2))
+		{
+			if (str1.size() != str2.size())
+				std::cout << "wrong" << std::endl;
+		}
+		else
+		{
+			return;
+		}
+	}
+
+}
+
+int main()
+{
+	std::thread em1(fun_em);
+	std::thread em2(fun_ori);
+	std::thread em3(fun_app);
+
+	em1.join();
+	em2.join();
+	em3.join();
+
+	tee();
+	system("pause");
+}

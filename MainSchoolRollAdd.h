@@ -25,6 +25,7 @@ public:
 	~MainSchoolRollAdd();
 
 	void on_button_add();
+    void on_combox_college_change();
 
 private:
 	QPLabel 		m_label_ID,    m_label_college, m_label_name,
@@ -37,6 +38,7 @@ private:
 	QGridLayout*    m_gboxlay;
 	QDate *			m_date;
 	QDateEdit*		m_dateEdit;
+    QStringList*    m_StrList_college,*m_StrList_majr;
 };
 
 MainSchoolRollAdd::MainSchoolRollAdd()
@@ -71,6 +73,14 @@ MainSchoolRollAdd::MainSchoolRollAdd()
 	m_combox_major		= new QComboBox(this);//专业
 	m_combox_college	= new QComboBox(this);//学院
 	m_combox_sex		= new QComboBox(this);
+
+    QString("select distinct college from college").toUtf8();
+    //use first
+    QString("select * from college where college = '%1'").arg(m_combox_college->currentText());
+    QStringList *tmp;
+
+    //m_StrList_college = mysql->xxxx();
+    m_combox_college->addItems(*m_StrList_college);
 
 	m_combox_sex->addItem(QString::fromLocal8Bit("男"));
 	m_combox_sex->addItem(QString::fromLocal8Bit("女"));
@@ -128,7 +138,7 @@ MainSchoolRollAdd::MainSchoolRollAdd()
 	this->resize(540, 350);
 
 	QObject::connect(m_button_add, &QPushButton::clicked, this, &MainSchoolRollAdd::on_button_add);
-
+    QObject::connect(m_combox_college,&QComboBox::currentIndexChanged,this,&MainSchoolRollAdd::on_combox_college_change());
 
 	this->setWindowModality(Qt::ApplicationModal);
 	this->setAttribute(Qt::WA_DeleteOnClose);
@@ -145,8 +155,37 @@ void MainSchoolRollAdd::on_button_add()
 	if (m_LineEdt_year->text().size() == 0)
 		m_label_msg_revise->setText(QString::fromLocal8Bit("请输入入学年份"));
 
-	QString tmp = m_combox_edu->currentText();
 
+    QString("insert into schoolroll values ('%1','%2','%3','%4','%5','%6','%7','%8','%9','%10')")
+            .arg(m_LineEdt_ID->text())
+            .arg(m_LineEdt_name->text())
+            .arg(m_combox_college->currentText())
+            .arg(m_combox_major->currentText())
+            .arg(m_combox_sex->currentText())
+            .arg(m_LineEdt_year->text())
+            .arg(m_combox_edu->currentText())
+            .arg(m_combox_xz->currentText())
+            .arg(m_LineEdt_perID->text())
+            .arg(m_dateEdit->date().toString(Qt::ISODate));
+    //mysql-> tian jia
+    m_label_msg_revise->setText(QString::fromLocal8Bit("shi bai qing chong shi"));
+
+
+
+}
+
+MainSchoolRollAdd::on_combox_college_change()
+{
+   QString tmp =  QString("select major from college where college = '%1'").arg(m_combox_college->currentText());
+   //mysql->input_sql
+
+   //fail
+    m_label_msg_revise->setText(QString::fromLocal8Bit("shi bai qing chong shi"));
+    //success
+    m_combox_major->clear();
+   delete m_StrList_majr;
+    m_StrList_majr;//=mysql->xxx();
+    m_combox_major->addActions(*m_StrList_majr);
 }
 
 MainSchoolRollAdd::~MainSchoolRollAdd()

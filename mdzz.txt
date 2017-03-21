@@ -277,7 +277,7 @@ void QComboBox::currentIndexChanged(const QString &text)
 	std::cout << double(duration.count())*std::chrono::microseconds::period::num / std::chrono::microseconds::period::den << "Ãë" << std::endl;
 
 
-
+dynamic_cast
 
 
 

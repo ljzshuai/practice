@@ -73,6 +73,12 @@ MainGradeAdd::MainGradeAdd()
 	m_gboxlay->addWidget(m_button_add, 4, 1, 1, 1);
 	m_gboxlay->addWidget(m_label_msg_revise, 4, 2, 1, 1);
 
+
+    QString("select distinct term from grade").toUtf8();
+    //use first
+    QString("select * from grade where term = '%1'").arg(m_combox_college->currentText());
+    QStringList *tmp;
+
 	m_combox_subject->addItem("12345");
 	m_combox_subject->addItem("qwerrt");
 

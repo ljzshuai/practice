@@ -9,6 +9,7 @@
 #include <qtablewidget.h>
 #include <QTableWidgetItem>
 #include <QHeaderView>
+//#include <vector>
 #include <QGridLayout>
 #include <QComboBox>
 #include <qfile.h>
@@ -24,14 +25,17 @@ public:
 	MainSchoolRollRevise();
 	~MainSchoolRollRevise();
 
+    void on_button_query();
+    void on_button_revise();
+
 private:
 	QPLabel 		m_label_ID, m_label_college, m_label_name,m_label_msg_revise,
 		            m_label_major, m_label_sex, m_label_year, m_label_msg_ch,
 		            m_label_edu, m_label_xz, m_label_perID, m_label_birth;
 
-	QPLineEdit 		m_LineEdt_ID, m_LineEdt_perID, m_LineEdt_year, m_LineEdt_name;
+    QPLineEdit 		m_LineEdt_ID, m_LineEdt_perID, m_LineEdt_year, m_LineEdt_name,
+                    m_LineEdt_college, m_LineEdt_major, m_LineEdt_edu, m_LineEdt_xz, m_LineEdt_sex;
 	QPushButton *	m_button_query,*m_button_revise;
-	QPComboBox		m_combox_college, m_combox_major, m_combox_edu, m_combox_xz, m_combox_sex;
 	QGridLayout*    m_gboxlay;
 	QDate *			m_date;
 	QDateEdit*		m_dateEdit;
@@ -54,38 +58,22 @@ MainSchoolRollRevise::MainSchoolRollRevise()
 	m_label_perID   = new QLabel(QString::fromLocal8Bit("      身份证"), this);
 	m_label_birth   = new QLabel(QString::fromLocal8Bit("      生日"));//
 	m_label_msg_revise = new QLabel(this);
-	m_label_msg_ch  = new QLabel(this);
+    m_label_msg_ch     = new QLabel(this);
 
-	m_LineEdt_ID    = new QLineEdit(this);
-	m_LineEdt_perID = new QLineEdit(this);
-	m_LineEdt_year  = new QLineEdit(this);
-	m_LineEdt_name  = new QLineEdit(this);
+    m_LineEdt_ID      = new QLineEdit(this);
+    m_LineEdt_name    = new QLineEdit(this);
+    m_LineEdt_perID   = new QLineEdit(this);
+    m_LineEdt_year    = new QLineEdit(this);
+    m_LineEdt_xz      = new QLineEdit(this);//学制
+    m_LineEdt_edu     = new QLineEdit(this);//学历
+    m_LineEdt_major   = new QLineEdit(this);//专业
+    m_LineEdt_college = new QLineEdit(this);//学院
+    m_LineEdt_sex     = new QLineEdit(this);
 
 	m_gboxlay = new QGridLayout(this);
 
 	m_button_query  = new QPushButton(QString::fromLocal8Bit("查询"), this);
 	m_button_revise = new QPushButton(QString::fromLocal8Bit("修改"), this);
-
-	m_combox_xz      = new QComboBox(this);//学制
-	m_combox_edu     = new QComboBox(this);//学历
-	m_combox_major   = new QComboBox(this);//专业
-	m_combox_college = new QComboBox(this);//学院
-	m_combox_sex = new QComboBox(this);
-
-	m_combox_sex->addItem(QString::fromLocal8Bit("男"));
-	m_combox_sex->addItem(QString::fromLocal8Bit("女"));
-
-	m_combox_xz->addItem(QString::fromLocal8Bit("一年"));
-	m_combox_xz->addItem(QString::fromLocal8Bit("两年"));
-	m_combox_xz->addItem(QString::fromLocal8Bit("三年"));
-	m_combox_xz->addItem(QString::fromLocal8Bit("四年"));
-	m_combox_xz->addItem(QString::fromLocal8Bit("五年"));
-
-	m_combox_edu->addItem(QString::fromLocal8Bit("专科"));
-	m_combox_edu->addItem(QString::fromLocal8Bit("本科"));
-	m_combox_edu->addItem(QString::fromLocal8Bit("硕士"));
-	m_combox_edu->addItem(QString::fromLocal8Bit("博士"));
-	m_combox_edu->addItem(QString::fromLocal8Bit("博士后"));
 
 
 	m_gboxlay->addWidget(m_label_ID, 0, 0, 1, 1);
@@ -97,21 +85,21 @@ MainSchoolRollRevise::MainSchoolRollRevise()
 	m_gboxlay->addWidget(m_LineEdt_name, 1, 1, 1, 1);
 
 	m_gboxlay->addWidget(m_label_college, 2, 0, 1, 1);
-	m_gboxlay->addWidget(m_combox_college, 2, 1, 1, 2);
+    m_gboxlay->addWidget(m_LineEdt_college, 2, 1, 1, 2);
 
 	m_gboxlay->addWidget(m_label_major, 3, 0, 1, 1);
-	m_gboxlay->addWidget(m_combox_major, 3, 1, 1, 2);
+    m_gboxlay->addWidget(m_LineEdt_major, 3, 1, 1, 2);
 
 	m_gboxlay->addWidget(m_label_xz, 4, 0, 1, 1);
-	m_gboxlay->addWidget(m_combox_xz, 4, 1, 1, 2);
+    m_gboxlay->addWidget(m_LineEdt_xz, 4, 1, 1, 2);
 
 	m_gboxlay->addWidget(m_label_edu, 5, 0, 1, 1);
-	m_gboxlay->addWidget(m_combox_edu, 5, 1, 1, 2);
+    m_gboxlay->addWidget(m_LineEdt_edu, 5, 1, 1, 2);
 
 	m_gboxlay->addWidget(m_label_year, 6, 0, 1, 1);
 	m_gboxlay->addWidget(m_LineEdt_year, 6, 1, 1, 1);
 	m_gboxlay->addWidget(m_label_sex, 6, 2, 1, 1);
-	m_gboxlay->addWidget(m_combox_sex, 6, 3, 1, 1);
+    m_gboxlay->addWidget(m_LineEdt_sex, 6, 3, 1, 1);
 
 	m_gboxlay->addWidget(m_label_birth, 7, 0, 1, 1);
 	m_gboxlay->addWidget(m_dateEdit, 7, 1, 1, 1);
@@ -134,6 +122,46 @@ MainSchoolRollRevise::MainSchoolRollRevise()
 	this->setAttribute(Qt::WA_DeleteOnClose);
 	this->setWindowModality(Qt::ApplicationModal);
 }
+void MainSchoolRollRevise::on_button_revise()
+{
+    QString query1 = QString("update schoolroll set ID = '%1',name = '%2',college = '%3'"
+                                                         ",major = '%4',sex = '%5',year = '%6',edu = '%7'"
+                                                         ",xz = '%8',perID = '%9',birth = '%10'")
+            .arg(m_LineEdt_ID->text())
+            .arg(m_LineEdt_name->text())
+            .arg(m_LineEdt_college->text())
+            .arg(m_LineEdt_major->->text())
+            .arg(m_LineEdt_sex->->text())
+            .arg(m_LineEdt_year->text())
+            .arg(m_LineEdt_edu->text())
+            .arg(m_LineEdt_xz->text())
+            .arg(m_LineEdt_perID->text())
+            .arg(m_dateEdit->date().toString(Qt::ISODate));
+       //
+}
+
+void MainSchoolRollRevise::on_button_query()
+{
+    QString query1 = QString("select * from schoolroll where ID = '%1").arg(m_LineEdt_ID);
+    char tmp[1024];
+   // std::vector<QString> tmp =
+    m_LineEdt_ID->setText(tmp[0]);
+    m_LineEdt_name->setText(tmp[1]);
+    m_LineEdt_college->setText(tmp[2]);
+    m_LineEdt_major->setText(tmp[3]);
+    m_LineEdt_sex->setText(tmp[4]);
+    m_LineEdt_year->setText(tmp[5]);
+    m_LineEdt_edu->setText(tmp[6]);
+    m_LineEdt_xz->setText(tmp[7]);
+    m_LineEdt_perID->setText(tmp[8]);
+    *m_date = QDate::fromString(tmp[9],"yyyy-MM-dd");
+    m_dateEdit->setDate(m_date);
+
+
+
+
+}
+
 
 MainSchoolRollRevise::~MainSchoolRollRevise()
 {

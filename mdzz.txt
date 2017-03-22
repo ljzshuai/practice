@@ -280,7 +280,14 @@ void QComboBox::currentIndexChanged(const QString &text)
 dynamic_cast
 
 
-
+modulw Demo {
+	#pragma DCPS_DATA_TYPE "Demo::Pos"
+	#pragma DCPS_DATA_KEY "Demo::Pos.pos_id"
+	typedef sequence<octet> lala;
+	struct Pos{
+		lala wei;
+	};
+};
 
 
 

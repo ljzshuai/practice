@@ -1,0 +1,90 @@
+#include <iostream>
+#include <string>
+#include <memory>
+#include <algorithm>
+#include <thread>
+#include <boost\asio.hpp>
+using namespace std;
+class serve
+{
+public:
+	serve(boost::asio::ip::tcp::endpoint ep,boost::asio::io_service&);
+	~serve();
+
+	void accept_start();
+	void send_start(std::shared_ptr<boost::asio::ip::tcp::socket> sock);
+	void handle_accept(const boost::system::error_code ec, std::shared_ptr<boost::asio::ip::tcp::socket>);
+	void handle_send(const boost::system::error_code ec, size_t);
+private:
+	boost::asio::io_service ios;
+	boost::asio::ip::address addr;
+	boost::asio::ip::tcp::endpoint ep;
+	boost::asio::ip::tcp::acceptor accept;
+
+};
+
+void serve::accept_start()
+{
+	std::shared_ptr<boost::asio::ip::tcp::socket> pclient = make_shared<boost::asio::ip::tcp::socket>(ios);
+
+	auto callback = [this,pclient](const boost::system::error_code ec){
+		if (ec)
+			return;
+		send_start(pclient);
+		accept_start();
+	};
+	accept.async_accept(*pclient, callback);
+}
+
+void serve::send_start(std::shared_ptr<boost::asio::ip::tcp::socket> sock)
+{
+	sock->write_some(boost::asio::buffer("hello boost"));
+}
+
+void serve::handle_send(const boost::system::error_code ec, size_t size)
+{
+
+}
+
+
+serve::serve(boost::asio::ip::tcp::endpoint ep, boost::asio::io_service& ios)
+	:accept(ios,ep)
+{
+
+}
+
+serve::~serve()
+{
+}
+
+void fun_thread_accept(string ip,int port)
+{
+	boost::asio::io_service ios;
+	boost::asio::ip::address addr;
+	addr = addr.from_string(ip);
+	boost::asio::ip::tcp::endpoint ep(addr, port);
+
+	std::shared_ptr<serve> Pserve = make_shared<serve>(ep, ios);
+	
+	Pserve->accept_start();
+
+	ios.run();
+}
+
+int main()
+{
+	//std::thread th1(fun_thread_accept,"127.0.0.1",8001);
+
+	//th1.join();
+	boost::asio::io_service ios;
+	boost::asio::ip::address addr;
+	addr = addr.from_string("127.0.0.1");
+	boost::asio::ip::tcp::endpoint ep(addr, 8001);
+
+	std::shared_ptr<serve> Pserve = make_shared<serve>(ep, ios);
+
+	Pserve->accept_start();
+
+	ios.run();
+	system("pause");
+}

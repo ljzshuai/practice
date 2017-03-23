@@ -216,6 +216,11 @@ f:
 所有消息同一个报文
 使用N个标识
 
+发送文件一个线程
+接收文件一个线程
+界面一个线程//定时器在这
+opendds一个线程 //接收消息自己创建的线程显示和界面一个线程
+
 
 在terminal中使用输入法输入
 terminal根据字符编码转换成二进制流
@@ -288,6 +293,42 @@ modulw Demo {
 		lala wei;
 	};
 };
+
+
+
+
+http://blog.csdn.net/liang19890820/article/details/50866096  label
+http://blog.csdn.net/liang19890820/article/details/51154216  paintEvent
+
+读取所有记录
+关文件
+显示
+添加新的
+写入
+
+
+struct {
+	char name[64];
+	char msg[1024];	
+};
+
+
+
+确定下载 连另一个端口
+发送路径
+处理路径
+发送文件夹
+
+确认上传
+s:
+检查重名
+无
+添加set返回 同意信息
+c
+
+
+
+
 
 
 

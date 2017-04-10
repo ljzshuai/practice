@@ -34,6 +34,11 @@ void Client::connect_m(ip::tcp::endpoint& ep,string path)
 
 void Client::recv_head()//接收包头
 {
+	if (_file_pkt._buf_used >= _file_pkt._head_sz)
+	{
+		get_head();
+		return;
+	}
 	auto CallBack = [this](const boost::system::error_code ec, size_t size)
 	{
 		std::cout << "头的大小  " << size << std::endl;
@@ -117,13 +122,13 @@ void Client::type0()//创建目录和文件
 	}
 
 	string temp_str;
-	vector<string>name(explode(_pkt->fileinfo._fname, '\\'));
+	vector<string>name(explode(_pkt->fileinfo._fname, '/'));
 
 	for (int i = _pkt->fileinfo._path_num; i != name.size(); ++i)
-		temp_str += name[i] + '\\';	
+		temp_str += name[i] + '/';	
 	temp_str.erase(temp_str.end() - 1);
 
-	temp_str = string(_path_save) + "\\" + temp_str;
+	temp_str = string(_path_save) + "/" + temp_str;
 
 	boost::filesystem::create_directories(boost::filesystem::path(temp_str.c_str()).parent_path());
 
@@ -151,5 +156,7 @@ void Client::type1()
 void Client::type2()
 {
 	fclose(_file);
+	_sock.close();
 	cout << "结束" << endl;
+	system("pause");
 }

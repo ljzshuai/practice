@@ -8,8 +8,8 @@ public:
 	~RecvSocket() = default;
 
 	void accept_start(string path);
-	vector<std::shared_ptr<ClientSocket>> clients;
 	void clean();
 private:
 	ip::tcp::acceptor		_accept;
+	vector<std::shared_ptr<ClientSocket>> clients;
 };

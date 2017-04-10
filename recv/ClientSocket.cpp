@@ -1,19 +1,5 @@
 #include "ClientSocket.h"
 #include "RecvSocket.h"
-const vector<string> explode(const string& s, const char& c)
-{
-	string buff{ "" };
-	vector<string> v;
-
-	for (auto n : s)
-	{
-		if (n != c) buff += n; else
-		if (n == c && buff != "") { v.push_back(buff); buff = ""; }
-	}
-	if (buff != "") v.push_back(buff);
-
-	return v;
-}
 
 ClientSocket::ClientSocket(string tmp)
 	 :_file(NULL)  ,_file_pkt_sz(0)
@@ -21,7 +7,7 @@ ClientSocket::ClientSocket(string tmp)
 	 ,final_(0)    ,_file_num(0)
 	 ,_path_num(0) ,_root_path(tmp)
 {	
-	_path_num=explode(tmp, '\\').size();
+	_path_num=explode(tmp, '/').size();
 }
 
 void ClientSocket::get_head()
@@ -50,7 +36,7 @@ void ClientSocket::get_path()
 {
 	file_packet_t * tmp = (file_packet_t *)_file_pkt._buf;
 	string need = tmp->fileinfo._fname;
-	string realPath = _root_path + "\\" + need;
+	string realPath = _root_path + "/" + need;
 	std::cout << realPath << std::endl;
 	boost_rd_iterator end;
 
@@ -116,6 +102,7 @@ void ClientSocket::send_start()
 	int tmp = read_m();
 	if (!tmp && final_) {
 		final_ = 2;
+		_sock->close();
 		return;
 	}
 	if (!tmp){
@@ -134,6 +121,7 @@ void ClientSocket::send_m()
 		if (_pkt_send_sz >= _pkt._header._mlen){ //ÊÇ·ñ·¢Íê
 			_pkt_send_sz = 0;
 			send_start();
+			return;
 		}
 		send_m();
 	};

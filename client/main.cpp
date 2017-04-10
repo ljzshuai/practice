@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 	addr = addr.from_string("127.0.0.1");
 	boost::asio::ip::tcp::endpoint ep(addr, 8001);
 
-	std::shared_ptr<Client> client = make_shared<Client>(ios,"E:\\WorkSpace");
+	std::shared_ptr<Client> client = make_shared<Client>(ios,"E:/WorkSpace");
 	client->connect_m(ep,"c_test");
 
 

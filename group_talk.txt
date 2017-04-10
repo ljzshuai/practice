@@ -1,0 +1,92 @@
+#ifndef USING_H
+#define USING_H
+#include <QWidget>
+#include <QGridLayout>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QTextEdit>
+#include <QLineEdit>
+#include <QLabel>
+#include <QListWidget>
+#include <QString>
+
+class iiu :public QWidget
+{
+public:
+    iiu();
+    ~iiu() =default;
+private:
+    QPushButton * m_button_send_group  ,*m_button_clear,
+                * m_button_talk_private,*m_button_folder;
+    QTextEdit   * m_textEdt_group,*m_textEdt_send;
+    QGridLayout * m_gridLay;
+    QVBoxLayout * m_vLay_left,*m_vLay_right;
+    QHBoxLayout * m_hlay;
+    QListWidget * m_table_people;
+    QLabel      * m_label_send_group,*m_label_all,*m_label_folder;
+};
+iiu::iiu()
+{
+    m_button_send_group   = new QPushButton(QString::fromLocal8Bit("发送"),this);
+    m_button_clear        = new QPushButton(QString::fromLocal8Bit("清空"),this);
+    m_button_folder       = new QPushButton(QString::fromLocal8Bit("打开共享文件夹"),this);
+    m_button_talk_private = new QPushButton(QString::fromLocal8Bit("私聊"),this);
+
+    m_textEdt_group       = new QTextEdit(this);
+    m_textEdt_send        = new QTextEdit(this);
+
+    QSizePolicy policy = m_textEdt_group->sizePolicy();
+    policy.setVerticalStretch(4);
+    m_textEdt_group->setSizePolicy(policy);
+
+    policy = m_textEdt_send->sizePolicy();
+    policy.setVerticalStretch(1);
+    m_textEdt_send->setSizePolicy(policy);
+
+    m_table_people        = new QListWidget(this);
+
+    m_label_send_group    = new QLabel(this);
+    m_label_all           = new QLabel(this);
+    m_label_folder        = new QLabel(this);
+
+    m_vLay_left           = new QVBoxLayout();
+    m_vLay_right          = new QVBoxLayout();
+    m_hlay                = new QHBoxLayout();
+
+    m_gridLay             = new QGridLayout(this);
+
+    m_hlay->addWidget(m_button_clear);
+    m_hlay->addWidget(m_button_send_group);
+    m_hlay->addWidget(m_label_send_group);
+
+    m_vLay_left->addWidget(m_label_all);
+    m_vLay_left->addWidget(m_textEdt_group);
+    m_vLay_left->addWidget(m_textEdt_send);
+    m_vLay_left->addLayout(m_hlay);
+
+    m_vLay_right->addWidget(m_label_folder);
+    m_vLay_right->addWidget(m_button_folder);
+    m_vLay_right->addWidget(m_table_people);
+    m_vLay_right->addWidget(m_button_talk_private);
+
+    m_gridLay->addLayout(m_vLay_left,0,0);
+    m_gridLay->addLayout(m_vLay_right,0,1);
+
+    m_gridLay -> setColumnStretch(0, 3);
+    m_gridLay -> setColumnStretch(1, 1);
+
+    QStringList     item;
+    item<<QString::fromLocal8Bit("正在获取在线用户")<<"12345";
+    m_table_people->addItems(item);
+    m_table_people->setCurrentRow(0);
+
+    m_table_people->clear();
+    item.clear();
+    item<<"1"<<"2"<<"3";
+    m_table_people->addItems(item);
+    m_table_people->setCurrentRow(0);
+}
+
+#endif
+

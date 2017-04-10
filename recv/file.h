@@ -76,3 +76,4 @@ struct recv_pkt{
 	~recv_pkt();
 };
 
+const vector<string> explode(const string& s, const char& c);

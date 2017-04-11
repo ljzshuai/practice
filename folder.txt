@@ -16,9 +16,13 @@
 
 class FolderShow :public QWidget
 {
+    Q_OBJECT
 public:
     FolderShow();
-   ~FolderShow()=default;
+   ~FolderShow();
+    
+    void on_button_open();
+    void on_button_dl();
 private:
     QPushButton  * m_button_open,*m_button_dl;
     QTableWidget * m_tablewidget;
@@ -47,10 +51,30 @@ FolderShow::FolderShow()
     m_gridlay->addWidget(m_button_open,7,0,1,1);
     m_gridlay->addWidget(m_button_dl,7,1,1,1);
 
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
-                                                     "/home",
-                                                  QFileDialog::ShowDirsOnly
-                                                     | QFileDialog::DontResolveSymlinks);
+    QString dir = QFileDialog::getExistingDirectory(this
+                                                    ,tr("Open Directory")
+                                                    ,"/home"
+                                                    ,QFileDialog::ShowDirsOnly
+                                                    |QFileDialog::DontResolveSymlinks);
+    QObject::connect(m_button_open,&QPushButton::clicked,this,&FolderShow::on_button_open);
+    QObject::connect(m_button_dl,&QPushButton::clicked,this,&FolderShow::on_button_dl);
+    
     qDebug()<<dir;
 }
+
 #endif // FOLDERSHOW_H
+
+void FolderShow::on_button_dl()
+{
+    
+}
+
+void FolderShow::on_button_open()
+{
+    
+}
+
+FolderShow::~FolderShow()
+{
+    
+}

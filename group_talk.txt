@@ -222,3 +222,23 @@ iiu::~iiu()
 {
 
 }
+
+
+
+void uii::m_i()
+{
+    lala1 = new QProgressBar(this);
+    lala1->setRange(0,100);
+    lala1->setValue(38);
+    vbox->insertWidget(1,lala1);
+}
+void uii::m_o()
+{
+      //QLayoutItem *child;
+     // child=vbox->takeAt(1);
+      delete lala1;
+
+}
+lala->setPlaceholderText("1234567890");
+http://blog.csdn.net/liang19890820/article/details/51539339
+http://download.csdn.net/download/crazygc/7644685

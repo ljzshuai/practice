@@ -352,3 +352,5 @@ Visual Studio Professional 2013  KEY£®√‹‘ø£©£∫ XDM3T-W3T3V-MGJWK-8BFVD-GVPKY
 
 Team Foundation Server 2013 KEY£®√‹‘ø£©£∫MHG9J-HHHX9-WWPQP-D8T7H-7KCQG
 
+
+https://dev.mysql.com/downloads/mysql/

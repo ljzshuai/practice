@@ -354,3 +354,187 @@ Team Foundation Server 2013 KEY（密钥）：MHG9J-HHHX9-WWPQP-D8T7H-7KCQG
 
 
 https://dev.mysql.com/downloads/mysql/
+
+QTimer::singleShot(0, qApp, SLOT(quit())); //在构造函数中退出程序
+
+unicode  qt
+utf-8    mysql
+GB18030  数据传送 
+utf-8    sqlit
+
+///
+https://wenku.baidu.com/view/50d36c665ef7ba0d4a733bcc.html
+http://blog.csdn.net/liuligui5200/article/details/49888823
+https://wenku.baidu.com/view/8600b8f5a5e9856a57126017.html
+
+
+
+目录
+摘   要    i
+Abstract    ii
+1  绪论    1
+1.1  课题背景    1
+1.2  目的和意义    1
+1.3  研究现状    1
+2  系统分析    3
+2.1  系统理论基础    3
+2.1.1  C/S架构    3
+2.1.2  TCP    3
+2.1.3  Socket    4
+2.1.4  QT编程框架    6
+2.2  可行性研究    10
+2.3  需求分析    11
+2.4  系统运行环境    11
+3  系统设计    12
+3.1  系统结构设计    12
+3.2  客户端服务器功能设计    
+3.3  客户端设计    13
+3.4  服务器端设计    14
+3.5  群聊和私聊模块的设计    16
+4  程序描述与详细描述    17
+4.1  服务器端验证客户端的登录信息    17
+4.1.1  功能及实现    17
+4.1.2  技术概要    18
+4.2  服务器端处理用户消息    20
+4.2.1  功能及实现    20
+4.2.2  技术概要    21
+4.3  客户端读取服务器发送的数据    23
+4.3.1  功能及实现    23
+4.3.2  技术概要    25
+4.4客户端用户列表的更新    25
+5  系统实现    27
+5.1  登录模块设计    27
+5.2  注册模块设计    28
+5.3  群聊模块设计    29
+5.4  私聊模块设计    32
+结论    34 
+参考文献    35
+致谢    36 〖
+
+
+
+
+
+以包为单位  {  http://blog.csdn.net/zhaoforyou/article/details/53590096  一次发很多 不拉不拉}
+
+
+发送文件实现{分块发送}
+
+多线程 
+线程简介
+为何使用线程 阻塞界面
+使用qt线程
+ 不支持别的线程操作界面线程
+qt线程使用举例
+
+功能实现
+ 群聊
+ 私聊
+ 登陆
+ 切换皮肤
+ 浏览文件夹
+ 下载文件或文件夹
+
+
+#include <QCheckBox>
+#include <QSqlDatabase>
+#include <QStringList>
+#include <QTextCodec>
+#include <QSqlError>
+#include <QSqlQuery>
+bool createConnection()
+{
+     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+     db.setDatabaseName("D:\\My Documents\\Documents\\untitled10\\testDB.db");
+
+    bool ok = db.open();
+    if(!ok){
+        QMessageBox::critical(0,QString::fromLocal8Bit(" 连接数据库失败！！！ "), db.lastError().text());
+        return false;
+    }else{
+        QMessageBox::information(0, QString::fromLocal8Bit("Tips"), QString::fromLocal8Bit(" 连接数据库成功！！！ "));
+        return true;
+    }
+}
+
+
+if(!createConnection())
+    {
+        qDebug()<<1;
+        return 1;
+
+    }
+    QSqlQuery sql_query;
+
+    QString qure1 = QString("insert into table1 values('%1',12)").arg(QString::fromLocal8Bit("中文"));
+
+    sql_query.prepare(qure1);
+    if(!sql_query.exec())
+    {
+    qDebug()<<sql_query.lastError();
+    }
+
+
+    QString qure("select * from table1");
+
+    sql_query.prepare(qure);
+    if(!sql_query.exec())
+    {
+    qDebug()<<sql_query.lastError();
+    }
+    else
+    {
+    while(sql_query.next())
+    {
+    int id = sql_query.value(1).toInt();
+    QString name = sql_query.value(0).toString();
+    tmp.push_back(name);
+    qDebug()<<QString("name :%1   age : %2").arg(name).arg("id");
+
+
+    }
+    w.addd(tmp);
+    w.show();
+
+
+
+}
+
+    return a.exec();
+}
+
+
+
+
+
+
+   checktwo->setChecked(false);
+
+    QObject::connect(checktwo,&QCheckBox::stateChanged,this,&Widget::change);
+    QObject::connect(checkone,&QCheckBox::stateChanged,this,&Widget::change1);
+
+void Widget::change1(int state)
+{
+    if(checktwo->isChecked())
+    {
+        checkone->setChecked(true);
+    }
+}
+
+void Widget::change(int state)
+{
+    if(state == Qt::Checked)
+    {
+        checkone->setChecked(true);
+        return;
+    }
+    checkone->setChecked(false);
+}
+
+combox->currentText();
+
+http://blog.sina.com.cn/s/blog_a6fb6cc90101eoop.html  阴影
+http://blog.sina.com.cn/s/blog_a6fb6cc90101au8r.html  无边框
+
+5.2 完善程序  加入sqlite 桌面图标 注册软件
+5.3 摘要 技术介绍  完成目录

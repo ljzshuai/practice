@@ -359,3 +359,5 @@ QTimer::singleShot(0, qApp, SLOT(quit())); //在构造函数中退出程序
 
 //任意外形widget
 http://blog.csdn.net/u012319493/article/details/52281192
+//任意形状按钮
+http://blog.csdn.net/starcloud_zxt/article/details/5185556

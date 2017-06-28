@@ -37,5 +37,9 @@ http://blog.csdn.net/liukang325/article/details/24304449
 
 //QSS博客
 http://www.cnblogs.com/wangqiguo/p/4960776.html
+
 //sql查询网站
- http://www.w3school.com.cn/sql/sql_distinct.asp
+http://www.w3school.com.cn/sql/sql_distinct.asp
+
+//Qt线程简介
+https://my.oschina.net/laopiao/blog/88158

@@ -15,8 +15,18 @@ Description:获取cmd命令数据
 
 #ifndef LCMD_H
 #define LCMD_H
+
+#include<cstdio>
 #include<string>
 #include<vector>
+
+#ifdef _WIN32
+#define Lpopen _popen
+#else
+#define Lpopen popen
+#endif
+
+namespace LJZ{
 
 enum LCMD_ERROR{
 	NOERROR,
@@ -43,4 +53,6 @@ private:
 	LCMD_ERROR error_;
 	std::vector<std::string> result_;
 };
+
+}//end namespace LJZ
 #endif //LCMD_H

@@ -1,9 +1,11 @@
 #include "LCmd.h"
 #include <cstdio>
 
+namespace LJZ{
+
 LCmd::LCmd() :result_num_(0)
-			,result_()
-			,error_(NOERROR)
+	, result_()
+	, error_(NOERROR)
 {
 }
 
@@ -18,10 +20,10 @@ bool LCmd::setCmd(const std::string& cmd)
 		return false;
 	}
 	char buf_ps[1024]{0};
-	FILE *ptr=nullptr;
+	FILE *ptr = nullptr;
 
 	std::string tmp;
-	if ((ptr = _popen(cmd.c_str(), "r")) != nullptr)
+	if ((ptr = Lpopen(cmd.c_str(), "r")) != nullptr)
 	{
 		while (fgets(buf_ps, 1024, ptr) != nullptr)
 		{
@@ -40,6 +42,7 @@ std::string LCmd::getLastResult()
 {
 	return result_.back();
 }
+
 std::string LCmd::getResult(const unsigned&countdown)
 {
 	if (countdown == 0)
@@ -54,6 +57,7 @@ std::string LCmd::getResult(const unsigned&countdown)
 	}
 	return result_[result_.size() - countdown];
 }
+
 void LCmd::clear()
 {
 	result_.swap(std::vector<std::string>());
@@ -75,10 +79,12 @@ std::string LCmd::getLastError()
 	case NO_INPUT:
 		return "no cmd";
 	default:
-		return "unknow error";
+	return "unknow error";
 	}
 }
 
 LCmd::~LCmd()
 {
 }
+
+}//end namespace LJZ

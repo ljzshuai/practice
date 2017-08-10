@@ -1,7 +1,10 @@
 http://www.cnblogs.com/haippy/p/3237213.html
 http://blog.csdn.net/yamingwu/article/details/47841689 std::thread
+http://blog.163.com/zhengjiu_520/blog/static/3559830620093583438464/ lib dll
 const int #define
 char *a; char a[19]
+
+ctime_s(); 时间字符串
 
 C++规定，对象的成员变量的初始化动作发生在进入构造函数本体之前。 
 #ifndef A_H_

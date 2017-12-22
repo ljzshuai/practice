@@ -358,9 +358,18 @@ Team Foundation Server 2013 KEY（密钥）：MHG9J-HHHX9-WWPQP-D8T7H-7KCQG
 
 https://dev.mysql.com/downloads/mysql/
 
+
+
 QTimer::singleShot(0, qApp, SLOT(quit())); //在构造函数中退出程序
 
 //任意外形widget
 http://blog.csdn.net/u012319493/article/details/52281192
 //任意形状按钮
 http://blog.csdn.net/starcloud_zxt/article/details/5185556
+
+
+
+
+http://blog.sina.com.cn/s/blog_a6fb6cc90101gv2p.html
+http://blog.csdn.net/xiexingshishu/article/details/44457539
+http://blog.csdn.net/fcqwin/article/details/17885557

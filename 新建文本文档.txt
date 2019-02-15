@@ -1,0 +1,29 @@
+setEditTriggers
+enum EditTrigger {
+    NoEditTriggers = 0,     //不可编辑
+    CurrentChanged = 1,     //任何时候都能对单元格修改
+    DoubleClicked = 2,      //双击单元格
+    SelectedClicked = 4,    //单击已选中的内容
+    EditKeyPressed = 8,     //键盘的编辑键，如F2
+    AnyKeyPressed = 16,     //按下任意键就能修改
+    AllEditTriggers = 31    //以上条件全包括
+};
+
+setSelectionBehavior
+enum SelectionBehavior {
+    SelectItems,        //选中单个单元格
+    SelectRows,         //选中一行
+    SelectColumns       //选中一列
+};
+
+setSelectionMode：设置单选、多选
+enum SelectionMode {
+    NoSelection,        //不能选择
+    SingleSelection,    //单选
+    MultiSelection,     //多选，不用按ctrl键即可多选，选择新项时不取消之前选择，已选中的再选择会取消选择
+    ExtendedSelection,  //多选，按ctrl、shift键多选，选择新项时取消之前选择
+    ContiguousSelection   //多选，需要按ctrl或shift都是shift选中效果,即选中两次点击之间的所有元素
+};
+
+
+https://blog.csdn.net/dpsying/article/details/53576917

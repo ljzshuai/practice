@@ -5,6 +5,8 @@ const int #define
 char *a; char a[19]
 
 ctime_s(); 时间字符串
+http://blog.163.com/qimo601@126/blog/static/158220932014423114030117/ qt获取点坐标
+http://www.cnblogs.com/yangfengwu/p/5294921.html 单片机 android
 
 C++规定，对象的成员变量的初始化动作发生在进入构造函数本体之前。 
 #ifndef A_H_
